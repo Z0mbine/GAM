@@ -384,6 +384,7 @@ if SERVER then
 	meta = FindMetaTable("Entity")
 
 	function meta:Corrode(attacker, ischain)
+		if not IsValid(attacker) then return end
 		local ind = self:EntIndex()
 		if ischain and (self:IsPlayer() and not self:HasGodMode() or self:IsNPC()) then
 			local d = DamageInfo()
