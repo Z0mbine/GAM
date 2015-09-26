@@ -406,6 +406,7 @@ if SERVER then
 		end
 		timer.Create("corrode" .. ind, CorrosiveDelay, CorrosiveDuration, function()
 			if self:IsPlayer() and self:HasGodMode() then timer.Remove("corrode" .. ind) return end
+			if not IsValid(attacker) then timer.Remove("corrode" .. ind) return end
 
 			if IsValid(self) and (self:IsPlayer() or self:IsNPC()) then
 				local dmag = DamageInfo()
