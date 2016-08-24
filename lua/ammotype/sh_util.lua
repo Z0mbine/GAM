@@ -379,14 +379,14 @@ if (SERVER) then
 				if (self:IsPlayer() and !self:HasGodMode()) then
 					self:ViewPunch(Angle(math.random(-2, 0), math.random(-2, 2), math.random(-2, 2)));
 					self:ScreenFade(SCREENFADE.IN, Color(225, 225, 130, 100), 0.3, 0);
-				end
+				end;
 
 				if (self:IsPlayer() and self:Armor() > 0 and !self:HasGodMode()) then
 					self:SetArmor(math.Clamp(self:Armor() - math.random(5, 23), 0, self:Armor()));
 					dmag:SetDamage(GAM("CorrosiveArmorDmg"));
 				else
 					dmag:SetDamage(GAM("CorrosiveNoArmorDmg"));
-				end
+				end;
 
 				if (self:IsPlayer() and !self:HasGodMode()) then
 					self:TakeDamageInfo(dmag);
@@ -399,7 +399,7 @@ if (SERVER) then
 
 					for i = 0, 10 do
 						ParticleEffect("antlion_spit", pos + Vector(math.random(-20, 20), math.random(-20, 20), 0), Angle(0, 0, 0));
-					end
+					end;
 
 					sound.Play("props/dissolve/object_dissolve_in_goo_0" .. math.random(1, 5) .. ".wav", pos, 75, 100, 0.5);
 					timer.Remove("corrode" .. ind);
@@ -561,8 +561,8 @@ else
 	end);
 end;
 
-hook.Add("Move", "GAM_Electrocuted", function(client, move)
-	if (client:GetNWBool("electrocuted", false)) then
-		move:SetMaxClientSpeed(client:GetWalkSpeed() / 2);
-	end;
-end);
+hook.Add("Move", "fixmove", function(client, move)
+	if client:GetNWBool("electrocuted", false) then
+		move:SetMaxClientSpeed( client:GetWalkSpeed()/2 )
+	end
+end)
